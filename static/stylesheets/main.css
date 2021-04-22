@@ -1,0 +1,48 @@
+body {
+    background-color: #22252a;
+}
+
+label{
+    margin: 10px 0;
+}
+
+input.form-control:focus{
+    color: inherit;
+    background: transparent;
+}
+
+form input.form-control:-webkit-autofill,
+form input.form-control:-webkit-autofill:hover,
+form input.form-control:-webkit-autofill:focus{
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+
+li > div > div{
+    width: 100%;
+}
+
+li.list-group-item button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+li.list-group-item{
+    border: none;
+    background-color: #3a3e46;
+    color: #fefefe;
+}
+
+li.list-group-item div.product-quantity button{
+    color: #2980ef;
+    outline: none;
+}
+
+button.remove-product{
+    font-size: 24px;
+    outline: none;
+}
+
+

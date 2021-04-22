@@ -1,0 +1,76 @@
+{% extends 'student/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+{% block dashboard %}active{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mt-5">
+        <div class="row g-1">
+            <div class="col-lg-6 bg-dark text-light shadow-sm px-4 py-3">
+
+                <div class="row">
+                    <div class="col-3"><h4>Name</h4></div>
+                    <div class="col-9"><h4>{{ student.user.get_full_name | title }}</h4></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-3"><h4>Balance</h4></div>
+                    <div class="col-9"><h4>{{ student.get_balance }}</h4></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <form class="d-flex justify-content-between  bg-light" method="GET" action="{% url "student:dashboard" %}"
+              id="transaction-form">
+            <div class="p-2">
+                <input type="hidden" name="student" value="1">
+                <label class="visually-hidden" for="category">Category</label>
+                <select class="form-select" name="category" id="category">
+                    <option value="0" selected>Canteen</option>
+                    <option value="1">Stationary</option>
+                    <option value="2">Transportation</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between p-2">
+                <div>
+                    <input type="date" name="date" id="date" class="form-control" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.product.name }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.get_total_amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    {% block scripts %}
+        <script src="{% static "js/student/dashboard.js" %}"></script>
+    {% endblock %}
+{% endblock %}

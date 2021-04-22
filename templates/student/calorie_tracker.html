@@ -1,0 +1,33 @@
+{% extends 'student/base.html' %}
+{% load static %}
+
+{% block title %}Calorie Tracker{% endblock %}
+{% block links %}
+    <link href="{% static "stylesheets/tracker.css" %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block calorie %}active{% endblock %}
+
+{% block content %}
+    <h1>Calorie Tracker</h1>
+    <hr>
+    <div class="mt-5">
+        <div id="svg-wrapper">
+            <div class="d-flex justify-content-end">
+                <select id="options" class="mx-3">
+
+                </select>
+            </div>
+
+            <div id="chart">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="{% static 'js/student/calorie-tracker.js' %}"></script>
+    <script src="{% static 'js/student/tracker.js' %}"></script>
+{% endblock %}
