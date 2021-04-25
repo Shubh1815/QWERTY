@@ -16,3 +16,6 @@ This Web application can be used in Schools and colleges.
 **Student Dashboard**
 ![](imgs/student.png)
 
+**Calorie Tracker**
+![](imgs/calorie-tracker.png)
+
