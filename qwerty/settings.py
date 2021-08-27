@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'manager.apps.ManagerConfig',
 ]
 
+ADMIN_SITE_HEADER = 'Qwerty'
+
 AUTH_USER_MODEL = 'users.CustomUser'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_URL = '/'
@@ -131,3 +133,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')

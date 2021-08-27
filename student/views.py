@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.contrib.admin.views.decorators import staff_member_required
+from django.template.loader import render_to_string
 from django.forms.models import model_to_dict
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.contrib.auth import get_user_model
 from django.db.models import Sum, F, DecimalField
 from django.urls import reverse_lazy
@@ -12,8 +14,10 @@ from core.models import Transaction
 from users.permissions import is_student, is_manager
 from qwerty.settings import LOGIN_URL
 
+from io import BytesIO, SEEK_SET
 import json
 import datetime
+import weasyprint
 
 # Create your views here.
 
@@ -112,3 +116,22 @@ def get_student_data(request, enrollment_no):
     student = get_object_or_404(Student, enrollment_no=enrollment_no)
 
     return JsonResponse(json.dumps(model_to_dict(student)), safe=False)
+
+
+@staff_member_required
+def student_id_pdf(request, enrollment_no):
+    student = get_object_or_404(Student, enrollment_no=enrollment_no)
+
+    html = render_to_string('student/student-ID.html', {
+        'users': [student.user],
+    })
+
+    out = BytesIO()
+
+    weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(
+        out
+    )
+    out.seek(SEEK_SET)
+    response = FileResponse(out, content_type="application/pdf", filename=f"{student.enrollment_no}_id.pdf")
+
+    return response

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import dashboard, profile, calorie_tracker, expense_tracker, tracker, get_student_data
+from .views import dashboard, profile, calorie_tracker, expense_tracker, tracker, get_student_data, student_id_pdf
 
 app_name = 'student'
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path('tracker/expense/', expense_tracker, name="expense_tracker"),
     path('tracker/<str:option>/<int:days>/', tracker, name="tracker_data"),
     path('<str:enrollment_no>/', get_student_data, name="get_student_data"),
+    path('<str:enrollment_no>/id/', student_id_pdf, name="student_id_pdf"),
 ]

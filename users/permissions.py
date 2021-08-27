@@ -1,7 +1,8 @@
 from django.shortcuts import redirect
+from django.conf.global_settings import LOGIN_URL
 
 
-def is_manager(login_url):
+def is_manager(login_url=LOGIN_URL):
     def inner(func):
         def wrapper(request, *args, **kwargs):
             if request.user.is_authenticated:
@@ -13,7 +14,7 @@ def is_manager(login_url):
     return inner
 
 
-def is_student(login_url):
+def is_student(login_url=LOGIN_URL):
     def inner(func):
         def wrapper(request, *args, **kwargs):
             if request.user.is_authenticated:
